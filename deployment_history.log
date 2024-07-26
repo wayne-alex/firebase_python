@@ -1,0 +1,12 @@
+2024-07-26 21:56:03: Set DEBUG to False
+2024-07-26 21:56:04: Generated requirements.txt
+2024-07-26 21:56:06: Configured static files and added Whitenoise middleware
+2024-07-26 21:56:08: Installed Whitenoise
+2024-07-26 21:56:08: Configured STATIC_URL, MEDIA_URL, and MEDIA_ROOT settings
+2024-07-26 21:56:08: Removed SQLite configuration
+2024-07-26 21:56:08: Added new database configuration
+2024-07-26 21:56:08: Created .env file with database placeholders
+2024-07-26 21:56:08: Updated ALLOWED_HOSTS
+2024-07-26 21:56:08: Added CSRF_TRUSTED_ORIGINS setting
+2024-07-26 21:56:08: Updated wsgi.py to include 'app = application'
+2024-07-26 21:56:08: Created vercel.json
