@@ -179,6 +179,27 @@ def create_vercel_json(project_name):
     log_change("Created vercel.json")
 
 
+def replace_psycopg2_with_psycopg2_binary(file_path):
+    try:
+        # Read the content of the requirements.txt file
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+
+        # Open the file in write mode to update its content
+        with open(file_path, 'w') as file:
+            for line in lines:
+                # Replace psycopg2 with psycopg2-binary
+                if 'psycopg2==' in line:
+                    file.write(line.replace('psycopg2==', 'psycopg2-binary=='))
+                else:
+                    file.write(line)
+
+        print(f"Updated {file_path} successfully.")
+    except FileNotFoundError:
+        print(f"The file {file_path} does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 def update_wsgi(project_name):
     wsgi_path = os.path.join(project_name, 'wsgi.py')
     with open(wsgi_path, 'a') as file:
@@ -250,6 +271,7 @@ def main():
     set_allowed_hosts(settings_path)
     add_csrf_trusted_origins(settings_path)
     update_wsgi(project_name)
+    replace_psycopg2_with_psycopg2_binary('requirements.txt')
     create_vercel_json(project_name)
 
     update_console("Django project configured for Vercel deployment.")
