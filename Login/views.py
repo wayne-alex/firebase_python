@@ -5,7 +5,7 @@ from .forms import SignUpForm
 
 # Create your views here.
 def login(request):
-    return render(request, template_name='Login.html')
+    return render(request, 'Login.html')
 
 
 def register(request):
