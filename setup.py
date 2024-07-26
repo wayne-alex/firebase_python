@@ -200,6 +200,7 @@ def replace_psycopg2_with_psycopg2_binary(file_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
 def update_wsgi(project_name):
     wsgi_path = os.path.join(project_name, 'wsgi.py')
     with open(wsgi_path, 'a') as file:
@@ -257,9 +258,6 @@ def main():
     if config['set_debug_false']:
         set_debug_to_false(settings_path)
 
-    if config['generate_requirements']:
-        generate_requirements()
-
     if config['configure_static_files']:
         configure_static_files(settings_path)
         add_whitenoise()
@@ -267,6 +265,9 @@ def main():
 
     if config['configure_database']:
         configure_database(settings_path, env_file)
+
+    if config['generate_requirements']:
+        generate_requirements()
 
     set_allowed_hosts(settings_path)
     add_csrf_trusted_origins(settings_path)

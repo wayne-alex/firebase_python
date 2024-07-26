@@ -4,6 +4,7 @@ import os
 import os
 import os
 import os
+import os
 """
 Django settings for firebase project.
 
@@ -116,6 +117,11 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+
+
+
+STATIC_URL = '/static/'
 
 
 
