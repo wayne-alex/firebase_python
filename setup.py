@@ -38,10 +38,17 @@ def add_os_import(settings_path):
     with open(settings_path, 'r') as file:
         lines = file.readlines()
 
+    # Check if 'import os' is already in the file
+    if any('import os' in line for line in lines):
+        print(f"'import os' already present in {settings_path}.")
+        return
+
     with open(settings_path, 'w') as file:
-        file.write("\nimport os\n")
+        file.write("import os\n")
         for line in lines:
             file.write(line)
+
+    print(f"Added 'import os' to {settings_path}.")
 
 
 def set_debug_to_false(settings_path):
@@ -112,8 +119,35 @@ def remove_sqlite_config(settings_path):
     log_change("Removed SQLite configuration")
 
 
+def add_load_dotenv_import(settings_path):
+    with open(settings_path, 'r') as file:
+        lines = file.readlines()
+
+    # Check if 'from dotenv import load_dotenv' and 'load_dotenv()' are already present
+    import_line_present = any('from dotenv import load_dotenv' in line for line in lines)
+    load_dotenv_call_present = any('load_dotenv()' in line for line in lines)
+
+    if import_line_present and load_dotenv_call_present:
+        print(f"'from dotenv import load_dotenv' and 'load_dotenv()' already present in {settings_path}.")
+        return
+
+    with open(settings_path, 'w') as file:
+        for line in lines:
+            file.write(line)
+            if line.strip() == 'import os':
+                if not import_line_present:
+                    file.write("from dotenv import load_dotenv\n")
+                if not load_dotenv_call_present:
+                    file.write("\n# Load environment variables from the .env file\n")
+                    file.write("load_dotenv()\n")
+
+    print(f"Added 'from dotenv import load_dotenv' and 'load_dotenv()' to {settings_path}.")
+    log_change("Added 'from dotenv import load_dotenv' and 'load_dotenv()' to settings.py")
+
+
 def add_database_config(settings_path):
     add_os_import(settings_path)
+    add_load_dotenv_import(settings_path)
     db_config = """
 DATABASES = {
     'default': {
@@ -236,11 +270,24 @@ def add_csrf_trusted_origins(settings_path):
 
 
 def configure_static_and_media_settings(settings_path):
+    with open(settings_path, 'r') as file:
+        lines = file.readlines()
+
+    # Check if the settings are already present
+    static_url_present = any('STATIC_URL' in line for line in lines)
+    media_url_present = any('MEDIA_URL' in line for line in lines)
+    media_root_present = any('MEDIA_ROOT' in line for line in lines)
+
     with open(settings_path, 'a') as file:
-        file.write("\nSTATIC_URL = '/static/'\n")
-        file.write("MEDIA_URL = '/media/'\n")
-        file.write("MEDIA_ROOT = BASE_DIR / 'media'\n")
-    log_change("Configured STATIC_URL, MEDIA_URL, and MEDIA_ROOT settings")
+        if not static_url_present:
+            file.write("\nSTATIC_URL = '/static/'\n")
+        if not media_url_present:
+            file.write("MEDIA_URL = '/media/'\n")
+        if not media_root_present:
+            file.write("MEDIA_ROOT = BASE_DIR / 'media'\n")
+
+    if not (static_url_present and media_url_present and media_root_present):
+        log_change("Configured STATIC_URL, MEDIA_URL, and MEDIA_ROOT settings")
 
 
 def main():

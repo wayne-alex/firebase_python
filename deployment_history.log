@@ -1,12 +1,13 @@
-2024-07-26 22:41:12: Set DEBUG to False
-2024-07-26 22:41:15: Configured static files and added Whitenoise middleware
-2024-07-26 22:41:17: Installed Whitenoise
-2024-07-26 22:41:17: Configured STATIC_URL, MEDIA_URL, and MEDIA_ROOT settings
-2024-07-26 22:41:17: Removed SQLite configuration
-2024-07-26 22:41:17: Added new database configuration
-2024-07-26 22:41:17: Created .env file with database placeholders
-2024-07-26 22:41:18: Generated requirements.txt
-2024-07-26 22:41:18: Updated ALLOWED_HOSTS
-2024-07-26 22:41:18: Added CSRF_TRUSTED_ORIGINS setting
-2024-07-26 22:41:18: Updated wsgi.py to include 'app = application'
-2024-07-26 22:41:18: Created vercel.json
+2024-07-26 22:50:36: Set DEBUG to False
+2024-07-26 22:50:38: Configured static files and added Whitenoise middleware
+2024-07-26 22:50:40: Installed Whitenoise
+2024-07-26 22:50:40: Configured STATIC_URL, MEDIA_URL, and MEDIA_ROOT settings
+2024-07-26 22:50:40: Removed SQLite configuration
+2024-07-26 22:50:40: Added 'from dotenv import load_dotenv' and 'load_dotenv()' to settings.py
+2024-07-26 22:50:40: Added new database configuration
+2024-07-26 22:50:40: Created .env file with database placeholders
+2024-07-26 22:50:41: Generated requirements.txt
+2024-07-26 22:50:41: Updated ALLOWED_HOSTS
+2024-07-26 22:50:41: Added CSRF_TRUSTED_ORIGINS setting
+2024-07-26 22:50:41: Updated wsgi.py to include 'app = application'
+2024-07-26 22:50:41: Created vercel.json

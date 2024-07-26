@@ -1,5 +1,8 @@
-
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from the .env file
+load_dotenv()
 """
 Django settings for firebase project.
 
@@ -114,10 +117,10 @@ STATIC_URL = '/static/'
 
 
 
+
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Database settings from .env
